@@ -1,6 +1,6 @@
 let nombre = prompt("Por favor, ingrese su nombre.");
 
-if (nombre === ""){
+if (nombre === "", nombre !== "ESC"){
 	for (let i = 3; i > 0; i--){
 		nombre = prompt ("Ingrese su nombre. Le quedan " + i + " intentos");
 	}
