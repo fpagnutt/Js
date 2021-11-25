@@ -29,6 +29,7 @@ let nombre = prompt("Ingrese su nombre");
 let mensajeSaludo = document.getElementById("saludo");
 mensajeSaludo.innerHTML = "Bienvenidx " + nombre;
 
+
 let edad2 = prompt("Ingrese su edad");
 
 if (edad2 >= 18){	
