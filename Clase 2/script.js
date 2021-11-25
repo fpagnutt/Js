@@ -4,7 +4,6 @@ let dolar = 195;
 let usdt = dolar;
 let paseDolar;
 let paseBnb;
-let datosComprador = [];
 let cantidad;
 let compra;
 
@@ -24,20 +23,15 @@ class Conversion{
 	}
 }
 
-class Compradores{
-	constructor(nombre, apellido, edad){
-		this.nombre = nombre.toUpperCase();
-		this.apellido = apellido.toUpperCase();
-		this.edad = edad.toString();
-	}
-}
 
-let nombre = prompt("Por favor, ingrese su nombre");
-let apellido = prompt ("Por favor, ingrese su apellido");
-let edad = prompt("Por ultimo, ingrese su edad");
-if (edad >= 18){
-	let comprador = new Compradores(nombre, apellido, edad);
-	datosComprador.push(comprador); 
+
+let nombre = prompt("Ingrese su nombre");
+let mensajeSaludo = document.getElementById("saludo");
+mensajeSaludo.innerHTML = "Bienvenidx " + nombre;
+
+let edad2 = prompt("Ingrese su edad");
+
+if (edad2 >= 18){	
 	cantidad = parseInt(prompt("Ingrese en pesos($) la cantidad que desea comprar"));
 	if (cantidad > 0){
 		compra = new Conversion(cantidad, stock);
@@ -48,20 +42,21 @@ if (edad >= 18){
 		compra.cantidadBnb();
 		let continuar = prompt("Desea continuar? Escriba si o no, segun corresponda.");
 		if (continuar === "si") {
-			console.log("Operacion exitosa. Ha realizado una compra de "+paseBnb+" BNB");
+			let mensajeExito = document.getElementById("exito");
+			mensajeExito.innerHTML = "Operacion exitosa. Ha realizado una compra de "+paseBnb+" BNB"
 			stock = stock - paseBnb;
 		}else{
 			console.log("Operacion cancelada.");
 		}
 	}else {
-		console.log("La cantidad que usted desea comprar ("+paseBnb+") es superior a lo que tenemos disponible en este momento. Nuestra disponibilidad es de " + stock + " BNB");
+		let mensajeStock = document.getElementById("exito");
+		mensajeStock.innerHTML = "La cantidad que usted desea comprar es superior a lo que tenemos disponible en este momento. Nuestra disponibilidad es de " + stock + " BNB";
 	}
 }else{
-	console.log("Disculpe, este tipo de transaccion requiere que sea mayor de edad");
+	let mensajeEdad = document.getElementById("edad");
+	mensajeEdad.innerHTML = "Debes ser mayor de edad para realizar transacciones en este sitio";
 }
 
-
-	
 
 
 
