@@ -4,6 +4,9 @@
 	padding: 0;
 	margin:0;
 }
+body{
+	min-height: 100vh;
+}
 
 .header{
 	height: 125px;
@@ -34,7 +37,7 @@
 	text-align: center;
 	max-height: 100vh;
 	font-family: 'Space Mono', monospace;
-	font-size: 35px;
+	font-size: 20px;
 	padding-top: 90px;
 }
 .main img{
@@ -44,10 +47,45 @@
 	font-size: 20px;
 }
 .paddingTop{
-	padding-top: 10px;
+	padding-top: 40px;
 }
 .foot{
 	background: linear-gradient(90deg, rgba(244,50,50,1) 3%, rgba(235,105,85,1) 95%);
 	height: 40px; 
 }
 
+.contenedor{
+    display:grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%,20rem), 1fr));
+}
+
+.boton{
+	border: .5px solid;
+	background-color: ;
+	min-height: 40px;
+	width: 100px;
+}
+
+.fijo{
+	position: fixed;
+	
+}
+
+.textoForm{
+	font-size: 25px;
+	color: black;
+}
+
+.inputEstilo{
+	border: .5px solid black;
+	min-height: 45px;
+	width: 300px;.
+	font-family: 'Space Mono', monospace;
+	font-size: 20px;
+	text-align: center;
+}
+
+#contador2 img{
+	width: 10%;
+}
