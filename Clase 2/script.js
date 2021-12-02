@@ -69,7 +69,7 @@ for (const moneda of monedas){
 		contenedor.className = "card";
 		contenedor.innerHTML = `
 						<div class="paddingTop"></div>
-						<img src="C:/Users/pagnu/OneDrive/Desktop/Javascript/Clase 2/Js/Clase 2/img/${moneda.id}.png" class="card-img-top" alt= ${moneda.logo}>
+						<img src="./img/${moneda.id}.png" class="card-img-top" alt=${moneda.logo}>
                         <div class="card-body paddingTop">
                             <h4 class="card-title">${moneda.cripto}</h4>
                             <p class="card-text">${moneda.logo}</p>
