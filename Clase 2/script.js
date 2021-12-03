@@ -91,7 +91,7 @@ for (const moneda of monedas){
 	}
 
 
-
+let idCompra = [];
 
 //Compra de cripto - suma total y muestra imagen de cripto comprada
 function comprarCripto(producto){
@@ -101,13 +101,19 @@ function comprarCripto(producto){
 		if(compra.cantidad < producto.stock && producto.stock > 0){
 			carrito.push(producto);
 			compra.aumentarCantidad();
+			idCompra.push(producto.logo);
 								
 		}else{
 		alert("Disculpa " + localStorage.getItem("usuario") + " has alcanzado el maximo disponible");
+		let mensajeCompra = JSON.parse(localStorage.getItem("idCompra"));
+		alert("Has comprado: " + mensajeCompra);
+
+		
 		}
 	}else{
 		carrito.push(producto);	
 		producto.aumentarCantidad();
+		idCompra.push(producto.logo);
 		
 	}
 	let total = 0;
@@ -118,12 +124,14 @@ function comprarCripto(producto){
 		
 	}
 	
+	localStorage.setItem("idCompra", JSON.stringify(idCompra));
 	const contador = document.getElementById('contador');
 	contador.innerHTML = "Total 🛒 " + total;
 	localStorage.setItem('carrito', JSON.stringify(carrito));
 	const contador2 = document.getElementById("contador2");
 	contador2.innerHTML = "BULLCOIN Restantes: " + (5 - total);
 	localStorage.setItem('carrito', JSON.stringify(carrito));
+	//se carga la ultima cripto que selecciono
 	const prueba = document.getElementById("mainCompra");
 	prueba.innerHTML = `
 			<img src="./img/${producto.id}.png" class="imgMain" alt=${producto.logo}>
@@ -136,6 +144,12 @@ function comprarCripto(producto){
 
 
 
+
+
+
+
+/*
+
 function cargarLocalStorage(){
     let carro = JSON.parse(localStorage.getItem('carrito'))
     if(carro){
@@ -146,3 +160,6 @@ function cargarLocalStorage(){
 		    	
 	}
 }	
+
+*/
+
