@@ -58,6 +58,11 @@ function validar (event){
 	}else{
 		mensajeSaludo = document.getElementById("saludo");
 		mensajeSaludo.innerHTML = "Bienvenidx " + nombre + ". Te damos 5 BULLCOIN equivalentes a usd500, para que distribuyas a eleccion";
+		if( localStorage.getItem("usuario") == null){
+			localStorage.setItem("usuario", nombre);
+			alert("Iniciaste sesion como " + nombre);
+		}
+		
 	}
 		
 }
@@ -88,7 +93,7 @@ for (const moneda of monedas){
 
 
 
-//Compra de cripto 
+//Compra de cripto - suma total y muestra imagen de cripto comprada
 function comprarCripto(producto){
 	
 	let compra = carrito.find(el=> el.name === producto.name)
@@ -98,7 +103,7 @@ function comprarCripto(producto){
 			compra.aumentarCantidad();
 								
 		}else{
-		alert("Alcanzaste el maximo disponible");
+		alert("Disculpa " + localStorage.getItem("usuario") + " has alcanzado el maximo disponible");
 		}
 	}else{
 		carrito.push(producto);	
@@ -112,7 +117,7 @@ function comprarCripto(producto){
     
 		
 	}
-
+	
 	const contador = document.getElementById('contador');
 	contador.innerHTML = "Total 🛒 " + total;
 	localStorage.setItem('carrito', JSON.stringify(carrito));
@@ -121,23 +126,23 @@ function comprarCripto(producto){
 	localStorage.setItem('carrito', JSON.stringify(carrito));
 	const prueba = document.getElementById("mainCompra");
 	prueba.innerHTML = `
-		<img src="./img/${producto.id}.png" class="imgMain" alt=${producto.logo}>
-		<div class="card-body paddingTop">
-			<h4 class="card-title">${producto.cripto}</h4>
-			<p class="card-text">${producto.logo}</p>
-			
-		</div>
-
-	`
+			<img src="./img/${producto.id}.png" class="imgMain" alt=${producto.logo}>
+			<div class="card-body paddingTop">
+				<h4 class="card-title"><b>${producto.cripto}</b></h4>
+			</div>
+			`
 }
+
+
+
 
 function cargarLocalStorage(){
     let carro = JSON.parse(localStorage.getItem('carrito'))
     if(carro){
         for(let i = 0; i < carro.length; i++){
             carrito.push(new Criptomonedas(carro[i].id, carro[i].cripto, carro[i].logo, carro[i].precio, carro[i].stock, carro[i].equivalente, carro[i].cantidad ))
-        }
-    }
+			console.log(carro)
+		}
+		    	
+	}
 }	
-
-
