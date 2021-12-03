@@ -102,19 +102,51 @@ function comprarCripto(producto){
 			carrito.push(producto);
 			compra.aumentarCantidad();
 			idCompra.push(producto.logo);
-								
-		}else{
+			const prueba = document.getElementById("mainCompra");
+			prueba.innerHTML += `
+			<div class=>
+				
+				<div class="card-body paddingTop">
+					<h4 class="card-title">${producto.cripto}</h4>
+					<p class="card-text">${producto.logo}</p>
+					<p class="card-text" style="font-size: 17px">Precio: <b>${producto.precio}</b></p>
+					<p style="font-size: 15px"> Cada <b>Bullcoin</b> equivale: <b> ${producto.equivalente} ${producto.logo}<b></p>
+					<div class="paddingTop"></div>
+					
+				</div>
+			</div>
+			`
+			
+				
+			
+		}
+		else{
 		alert("Disculpa " + localStorage.getItem("usuario") + " has alcanzado el maximo disponible");
 		let mensajeCompra = JSON.parse(localStorage.getItem("idCompra"));
 		alert("Has comprado: " + mensajeCompra);
-
+		
 		
 		}
 	}else{
 		carrito.push(producto);	
 		producto.aumentarCantidad();
 		idCompra.push(producto.logo);
+		const prueba = document.getElementById("mainCompra");
+		prueba.innerHTML += `
+		<div>
 		
+			<div class="card-body paddingTop">
+				<h4 class="card-title">${producto.cripto}</h4>
+				<p class="card-text">${producto.logo}</p>
+				<p class="card-text" style="font-size: 17px">Precio: <b>${producto.precio}</b></p>
+				<p style="font-size: 15px"> Cada <b>Bullcoin</b> equivale: <b> ${producto.equivalente} ${producto.logo}<b></p>
+				<div class="paddingTop"></div>
+				
+			</div>
+		</div>
+		`
+			
+			
 	}
 	let total = 0;
  
@@ -131,24 +163,23 @@ function comprarCripto(producto){
 	const contador2 = document.getElementById("contador2");
 	contador2.innerHTML = "BULLCOIN Restantes: " + (5 - total);
 	localStorage.setItem('carrito', JSON.stringify(carrito));
-	//se carga la ultima cripto que selecciono
-	const prueba = document.getElementById("mainCompra");
-	prueba.innerHTML = `
-			<img src="./img/${producto.id}.png" class="imgMain" alt=${producto.logo}>
-			<div class="card-body paddingTop">
-				<h4 class="card-title"><b>${producto.cripto}</b></h4>
+	localStorage.setItem("compra", idCompra);
+	
+	
+}
+let nombre1 = localStorage.getItem("usuario")
+let mensaje = JSON.parse(localStorage.getItem("idCompra"));
+if (localStorage.getItem('compra') !== null){
+	const prueba2 = document.getElementById("contador2");
+		prueba2.innerHTML = `
+			<div>
+				<b>${nombre1}</b>, tu ultima compra quedo registrada. <b> COMPRA</b>: ${mensaje};
 			</div>
-			`
+			
+							
+				`
 }
 
-
-
-
-
-
-
-
-/*
 
 function cargarLocalStorage(){
     let carro = JSON.parse(localStorage.getItem('carrito'))
@@ -161,5 +192,4 @@ function cargarLocalStorage(){
 	}
 }	
 
-*/
 
