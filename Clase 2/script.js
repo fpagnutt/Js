@@ -17,7 +17,7 @@ class Criptomonedas{
 //creacion array
 const monedas = [];
 const carrito = [];
-
+let bullcoin;
 
 //carga de criptomonedas en los array
 const moneda1 = new Criptomonedas(1, "Binance Coin", "BNB", 600, 5, (100/600));
@@ -38,35 +38,43 @@ const moneda12 = new Criptomonedas(12, "Shiba Inu", "SHIB", 0.000042, 5, (100/0.
 monedas.push(moneda1, moneda2, moneda3, moneda4, moneda5, moneda6, moneda7, moneda8, moneda9, moneda10, moneda11, moneda12);
 
 
-
 //Validacion de los datos de input
 let formulario = document.getElementById("formulario");
-let local = localStorage.getItem("usuario")
+let local = JSON.parse(localStorage.getItem("usuario"))
+let mensajeSaludo = document.getElementById("saludo");
 
-if (local == null){
+
+
+if(!local){
 	formulario.addEventListener("submit", validar);
+}else{
+	if(local.edad < 18){
+		console.log('entro')
+		mensajeSaludo.innerHTML = "Bienvenidx " + local.nombre + ". Debes ser mayor para realizar transacciones en este sitio";
+	}else{
+		mensajeSaludo = document.getElementById("saludo");
+		mensajeSaludo.innerHTML = "Bienvenidx " + local.nombre + ". Te damos 5 BULLCOIN equivalentes a usd500, para que distribuyas a eleccion";
+	}
 }
 
 function validar (event){
 	event.preventDefault();
-
 	let elemento = event.target;
 	
-	nombre = elemento.children[0].value;
-	edad = elemento.children[1].value;
+	let nombre = elemento.children[0].value;
+	let edad = elemento.children[1].value;
 
 	if(edad < 18){
-		let mensajeSaludo = document.getElementById("saludo");
 		mensajeSaludo.innerHTML = "Bienvenidx " + nombre + ". Debes ser mayor para realizar transacciones en este sitio";
-	}else{
-		mensajeSaludo = document.getElementById("saludo");
-		mensajeSaludo.innerHTML = "Bienvenidx " + nombre + ". Te damos 5 BULLCOIN equivalentes a usd500, para que distribuyas a eleccion";
-		if( localStorage.getItem("usuario") == null){
-			localStorage.setItem("usuario", nombre);
-			
-		}
 		
+	}else{
+		mensajeSaludo.innerHTML = "Bienvenidx " + nombre + ". Te damos 5 BULLCOIN equivalentes a usd500, para que distribuyas a eleccion";
+		if(!localStorage.getItem("usuario")){
+			localStorage.setItem("usuario", JSON.stringify({nombre,edad}));
+			localStorage.setItem("edad", edad);
+		}
 	}
+
 		
 }
 
@@ -75,133 +83,101 @@ const mainIndex = document.getElementById('main');
 
 //creacion html con las cripto
 for (const moneda of monedas){
-		const contenedor = document.createElement("div");
-		contenedor.className = "card2";
-		contenedor.innerHTML = `
-						<img src="./img/${moneda.id}.png" class="imgMain" alt=${moneda.logo}>
-                        <div class="card-body paddingTop">
-                            <h4 class="card-title">${moneda.cripto}</h4>
-                            <p class="card-text">${moneda.logo}</p>
-                            <p class="card-text" style="font-size: 17px">Precio: <b>${moneda.precio}</b></p>
-							<p style="font-size: 15px"> Cada <b>Bullcoin</b> equivale: <b> ${moneda.equivalente} ${moneda.logo}<b></p>
-                            <div class="paddingTop"></div>
-                            <button id=${moneda.id} class="btn btn-primary comprar boton">COMPRAR</button>
-                        </div>
-                        `
-		mainIndex.append(contenedor);
-		document.getElementById(`${moneda.id}`).addEventListener('click', () => comprarCripto(moneda));
-		
-	}
-
-
-let idCompra = [];
-
-//Compra de cripto - suma total y muestra imagen de cripto comprada
-let consultaCarro = localStorage.getItem("idCompra");
-function comprarCripto(producto){
-	if(consultaCarro <= 5){
-		let compra = carrito.find(el=> el.name === producto.name)
-		if(compra){
-			if(compra.cantidad < producto.stock && producto.stock > 0){
-				carrito.push(producto);
-				compra.aumentarCantidad();
-				idCompra.push(producto.logo);
-				const prueba = document.getElementById("mainCompra");
-				prueba.innerHTML += `
-				<div class=>
-					
+	const contenedor = document.createElement("div");
+	contenedor.className = "card2";
+	contenedor.innerHTML = `
+					<img src="./img/${moneda.id}.png" class="imgMain" alt=${moneda.logo}>
 					<div class="card-body paddingTop">
-						<h4 class="card-title">${producto.cripto}</h4>
-						<p class="card-text">${producto.logo}</p>
-						<p class="card-text" style="font-size: 17px">Precio: <b>${producto.precio}</b></p>
-						<p style="font-size: 15px"> Cada <b>Bullcoin</b> equivale: <b> ${producto.equivalente} ${producto.logo}<b></p>
+						<h4 class="card-title">${moneda.cripto}</h4>
+						<p class="card-text">${moneda.logo}</p>
+						<p class="card-text" style="font-size: 17px">Precio: <b>${moneda.precio}</b></p>
+						<p style="font-size: 15px"> Cada <b>Bullcoin</b> equivale: <b> ${moneda.equivalente} ${moneda.logo}<b></p>
 						<div class="paddingTop"></div>
-						
+						<button id=${moneda.id} class="btn btn-primary comprar boton">COMPRAR</button>
 					</div>
-				</div>
-				`
-				
-					
-				
-			}
-			else{
-				const botonComprar = document.querySelectorAll(".comprar");
-				for (let i = 0; i < botonComprar.length; i++) {
-					botonComprar[i].disabled = true;	
-					}
-
-			
-			
-			}
-		}else{
-			carrito.push(producto);	
-			producto.aumentarCantidad();
-			idCompra.push(producto.logo);
-			const prueba = document.getElementById("mainCompra");
-			prueba.innerHTML += `
-			<div>
-			
-				<div class="card-body paddingTop">
-					<h4 class="card-title">${producto.cripto}</h4>
-					<p class="card-text">${producto.logo}</p>
-					<p class="card-text" style="font-size: 17px">Precio: <b>${producto.precio}</b></p>
-					<p style="font-size: 15px"> Cada <b>Bullcoin</b> equivale: <b> ${producto.equivalente} ${producto.logo}<b></p>
-					<div class="paddingTop"></div>
-					
-				</div>
-			</div>
-			`
-				
-				
-		}
-		let total = 0;
-	
-		for(let i=0; i<carrito.length;i++){
-			total++;
+					`
+	mainIndex.append(contenedor);
+	document.getElementById(`${moneda.id}`).addEventListener('click', () => comprarCripto(moneda));
 		
-			
-		}
-		
-		localStorage.setItem("idCompra", JSON.stringify(idCompra));
-		const contador = document.getElementById('contador');
-		contador.innerHTML = "Total 🛒 " + total;
-		localStorage.setItem('carrito', JSON.stringify(carrito));
-		const contador2 = document.getElementById("contador2");
-		contador2.innerHTML = "BULLCOIN Restantes: " + (5 - total);
-		localStorage.setItem('carrito', JSON.stringify(carrito));
-		localStorage.setItem("compra", idCompra);
-		
-	}else{
-		const botonComprar = document.querySelectorAll(".comprar");
-		for (let i = 0; i < botonComprar.length; i++) {
-			botonComprar[i].disabled = true;	
-			}
-		}	
-	}
-
-let nombre1 = localStorage.getItem("usuario")
-let mensaje = JSON.parse(localStorage.getItem("idCompra"));
-if (localStorage.getItem('compra') !== null){
-	const prueba2 = document.getElementById("contador2");
-		prueba2.innerHTML = `
-			<div>
-				<b>${nombre1}</b>, tu ultima compra quedo registrada. <b> COMPRA</b>: ${mensaje};
-			</div>
-			
-							
-				`
 }
 
 
+//Compra de cripto - suma total y muestra imagen de cripto comprada
+function comprarCripto(producto){
+	let edadComprador = JSON.parse(localStorage.getItem("edad"))
+	if(edadComprador >= 18){
+		let compra = carrito.find(el=> el.id === producto.id)
+		let bullDisponible = JSON.parse(localStorage.getItem('bullcoin'))
+		if(bullDisponible.monto !== 0 && bullDisponible.monto > 0){
+			if(compra){
+				if(compra.cantidad < producto.stock){
+					compra.aumentarCantidad();
+					let totalCripto = compra.cantidad * compra.equivalente
+					document.getElementById(`${producto.id}total`).innerHTML=`Total de ${producto.logo} adquirido: ${totalCripto}`
+					bullcoin--
+					localStorage.setItem('bullcoin', JSON.stringify({"monto": bullcoin}))
+				}else{
+					document.getElementById(`${producto.id}`).className='disabled'
+				}
+			}else{
+				let produc = producto
+				produc.aumentarCantidad()
+				carrito.push(produc)
+				let totalCripto = produc.cantidad * produc.equivalente
+				const prueba = document.getElementById("mainCompra");
+				prueba.innerHTML += `
+				<div class=>
+					<div class="card-body paddingTop">
+						<h4 class="card-title">${producto.cripto}</h4>
+						<p id="${producto.id}total" class="card-text" style="font-size: 17px">Total de ${producto.logo} adquirido: ${totalCripto}</b></p>
+						<p style="font-size: 15px"> Cada <b>Bullcoin</b> equivale: <b> ${producto.equivalente} ${producto.logo}<b></p>
+						<div class="paddingTop"></div>
+					</div>
+				</div>
+				`
+				bullcoin--
+				localStorage.setItem('bullcoin', JSON.stringify({"monto": bullcoin}))
+			}
+		}else{
+			//sweetalert
+			alert('Has alcanzado la compra maxima de 5 BULLCOINS')
+		}
+		localStorage.setItem('ventaCripto', JSON.stringify(carrito))
+	}
+}
+
 function cargarLocalStorage(){
-    let carro = JSON.parse(localStorage.getItem('carrito'))
+    let carro = JSON.parse(localStorage.getItem('ventaCripto'))
+	let bullDisponible = JSON.parse(localStorage.getItem('bullcoin'))
+	
+	//declaramos cuantas criptos tenemos almacenadas
+	if(!bullDisponible){
+		bullcoin = 5;
+		localStorage.setItem("bullcoin", JSON.stringify({"monto": bullcoin}));
+	}else{
+		bullcoin = bullDisponible.monto
+	}
+
     if(carro){
         for(let i = 0; i < carro.length; i++){
             carrito.push(new Criptomonedas(carro[i].id, carro[i].cripto, carro[i].logo, carro[i].precio, carro[i].stock, carro[i].equivalente, carro[i].cantidad ))
-			console.log(carro)
 		}
-		    	
+		for(const producto of carro){
+			let totalCripto = producto.cantidad * producto.equivalente
+			const prueba = document.getElementById("mainCompra");
+			prueba.innerHTML += `
+			<div class=>
+				<div class="card-body paddingTop">
+					<h4 class="card-title">${producto.cripto}</h4>
+					<p id="${producto.id}total" class="card-text" style="font-size: 17px">Total de ${producto.logo} adquirido: ${totalCripto}</b></p>
+					<p style="font-size: 15px"> Cada <b>Bullcoin</b> equivale: <b> ${producto.equivalente} ${producto.logo}<b></p>
+					<div class="paddingTop"></div>
+				</div>
+			</div>
+			`
+		}
 	}
-}	
+}
 
+cargarLocalStorage()
 
