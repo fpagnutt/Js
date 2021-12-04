@@ -48,7 +48,7 @@ function validar (event){
 	event.preventDefault();
 
 	let elemento = event.target;
-
+	
 	nombre = elemento.children[0].value;
 	edad = elemento.children[1].value;
 
@@ -60,7 +60,7 @@ function validar (event){
 		mensajeSaludo.innerHTML = "Bienvenidx " + nombre + ". Te damos 5 BULLCOIN equivalentes a usd500, para que distribuyas a eleccion";
 		if( localStorage.getItem("usuario") == null){
 			localStorage.setItem("usuario", nombre);
-			alert("Iniciaste sesion como " + nombre);
+			
 		}
 		
 	}
@@ -123,7 +123,7 @@ function comprarCripto(producto){
 		else{
 		alert("Disculpa " + localStorage.getItem("usuario") + " has alcanzado el maximo disponible");
 		let mensajeCompra = JSON.parse(localStorage.getItem("idCompra"));
-		alert("Has comprado: " + mensajeCompra);
+		
 		
 		
 		}
