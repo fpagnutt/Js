@@ -125,8 +125,12 @@ function comprarCripto(producto){
 				
 			}
 			else{
-			alert("Disculpa " + localStorage.getItem("usuario") + " has alcanzado el maximo disponible");
-			let mensajeCompra = JSON.parse(localStorage.getItem("idCompra"));
+				const botonComprar = document.querySelectorAll(".comprar");
+				for (let i = 0; i < botonComprar.length; i++) {
+					botonComprar[i].disabled = true;	
+					}
+
+			
 			
 			}
 		}else{
@@ -167,8 +171,14 @@ function comprarCripto(producto){
 		localStorage.setItem('carrito', JSON.stringify(carrito));
 		localStorage.setItem("compra", idCompra);
 		
-	}	
+	}else{
+		const botonComprar = document.querySelectorAll(".comprar");
+		for (let i = 0; i < botonComprar.length; i++) {
+			botonComprar[i].disabled = true;	
+			}
+		}	
 	}
+
 let nombre1 = localStorage.getItem("usuario")
 let mensaje = JSON.parse(localStorage.getItem("idCompra"));
 if (localStorage.getItem('compra') !== null){
