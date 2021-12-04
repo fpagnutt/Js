@@ -41,8 +41,11 @@ monedas.push(moneda1, moneda2, moneda3, moneda4, moneda5, moneda6, moneda7, mone
 
 //Validacion de los datos de input
 let formulario = document.getElementById("formulario");
+let local = localStorage.getItem("usuario")
 
-formulario.addEventListener("submit", validar);
+if (local == null){
+	formulario.addEventListener("submit", validar);
+}
 
 function validar (event){
 	event.preventDefault();
@@ -94,18 +97,46 @@ for (const moneda of monedas){
 let idCompra = [];
 
 //Compra de cripto - suma total y muestra imagen de cripto comprada
+let consultaCarro = localStorage.getItem("idCompra");
 function comprarCripto(producto){
-	
-	let compra = carrito.find(el=> el.name === producto.name)
-	if(compra){
-		if(compra.cantidad < producto.stock && producto.stock > 0){
-			carrito.push(producto);
-			compra.aumentarCantidad();
+	if(consultaCarro <= 5){
+		let compra = carrito.find(el=> el.name === producto.name)
+		if(compra){
+			if(compra.cantidad < producto.stock && producto.stock > 0){
+				carrito.push(producto);
+				compra.aumentarCantidad();
+				idCompra.push(producto.logo);
+				const prueba = document.getElementById("mainCompra");
+				prueba.innerHTML += `
+				<div class=>
+					
+					<div class="card-body paddingTop">
+						<h4 class="card-title">${producto.cripto}</h4>
+						<p class="card-text">${producto.logo}</p>
+						<p class="card-text" style="font-size: 17px">Precio: <b>${producto.precio}</b></p>
+						<p style="font-size: 15px"> Cada <b>Bullcoin</b> equivale: <b> ${producto.equivalente} ${producto.logo}<b></p>
+						<div class="paddingTop"></div>
+						
+					</div>
+				</div>
+				`
+				
+					
+				
+			}
+			else{
+			alert("Disculpa " + localStorage.getItem("usuario") + " has alcanzado el maximo disponible");
+			let mensajeCompra = JSON.parse(localStorage.getItem("idCompra"));
+			
+			}
+		}else{
+			carrito.push(producto);	
+			producto.aumentarCantidad();
 			idCompra.push(producto.logo);
 			const prueba = document.getElementById("mainCompra");
 			prueba.innerHTML += `
-			<div class=>
-				
+			<div>
+			
 				<div class="card-body paddingTop">
 					<h4 class="card-title">${producto.cripto}</h4>
 					<p class="card-text">${producto.logo}</p>
@@ -116,57 +147,28 @@ function comprarCripto(producto){
 				</div>
 			</div>
 			`
-			
 				
+				
+		}
+		let total = 0;
+	
+		for(let i=0; i<carrito.length;i++){
+			total++;
+		
 			
 		}
-		else{
-		alert("Disculpa " + localStorage.getItem("usuario") + " has alcanzado el maximo disponible");
-		let mensajeCompra = JSON.parse(localStorage.getItem("idCompra"));
 		
+		localStorage.setItem("idCompra", JSON.stringify(idCompra));
+		const contador = document.getElementById('contador');
+		contador.innerHTML = "Total 🛒 " + total;
+		localStorage.setItem('carrito', JSON.stringify(carrito));
+		const contador2 = document.getElementById("contador2");
+		contador2.innerHTML = "BULLCOIN Restantes: " + (5 - total);
+		localStorage.setItem('carrito', JSON.stringify(carrito));
+		localStorage.setItem("compra", idCompra);
 		
-		
-		}
-	}else{
-		carrito.push(producto);	
-		producto.aumentarCantidad();
-		idCompra.push(producto.logo);
-		const prueba = document.getElementById("mainCompra");
-		prueba.innerHTML += `
-		<div>
-		
-			<div class="card-body paddingTop">
-				<h4 class="card-title">${producto.cripto}</h4>
-				<p class="card-text">${producto.logo}</p>
-				<p class="card-text" style="font-size: 17px">Precio: <b>${producto.precio}</b></p>
-				<p style="font-size: 15px"> Cada <b>Bullcoin</b> equivale: <b> ${producto.equivalente} ${producto.logo}<b></p>
-				<div class="paddingTop"></div>
-				
-			</div>
-		</div>
-		`
-			
-			
+	}	
 	}
-	let total = 0;
- 
-	for(let i=0; i<carrito.length;i++){
-		total++;
-    
-		
-	}
-	
-	localStorage.setItem("idCompra", JSON.stringify(idCompra));
-	const contador = document.getElementById('contador');
-	contador.innerHTML = "Total 🛒 " + total;
-	localStorage.setItem('carrito', JSON.stringify(carrito));
-	const contador2 = document.getElementById("contador2");
-	contador2.innerHTML = "BULLCOIN Restantes: " + (5 - total);
-	localStorage.setItem('carrito', JSON.stringify(carrito));
-	localStorage.setItem("compra", idCompra);
-	
-	
-}
 let nombre1 = localStorage.getItem("usuario")
 let mensaje = JSON.parse(localStorage.getItem("idCompra"));
 if (localStorage.getItem('compra') !== null){
