@@ -123,7 +123,6 @@ function comprarCripto(producto){
 	let edadComprador = JSON.parse(localStorage.getItem("edad"))
 	if(edadComprador >= 18){
 		
-
 		let compra = carrito.find(el=> el.id === producto.id)
 		let bullDisponible = JSON.parse(localStorage.getItem('bullcoin'))
 		if(bullDisponible.monto !== 0 && bullDisponible.monto > 0){
@@ -131,15 +130,15 @@ function comprarCripto(producto){
 				if(compra.cantidad < producto.stock){
 					compra.aumentarCantidad();
 					contador++;
+					localStorage.setItem("contador", contador);
+					storageContador = localStorage.getItem("contador", contador);
 					let totalCripto = compra.cantidad * compra.equivalente
 					$("#mainCompra").html(  `
-							<a href="carrito.html" id="${producto.id}total" class="cart">🛒${contador}</a>
+							<a href="carrito.html" id="${producto.id}total" class="cart">🛒${storageContador}</a>
 									`
 						);
 											
-									
-					localStorage.setItem("contador", contador);
-									
+													
 					bullcoin--
 					localStorage.setItem('bullcoin', JSON.stringify({"monto": bullcoin}))
 					
@@ -150,17 +149,17 @@ function comprarCripto(producto){
 				let produc = producto 
 				produc.aumentarCantidad()
 				carrito.push(produc)
-				contador++;
+				
 				let totalCripto = produc.cantidad * produc.equivalente
 				
+				contador++;
+				localStorage.setItem("contador", contador);
+				storageContador = localStorage.getItem("contador", contador);
+
 				$("#mainCompra").html(  `
-							<a href="carrito.html" id="${producto.id}total" class="cart">🛒${contador}</a>
+							<a href="carrito.html" id="${producto.id}total" class="cart">🛒${storageContador}</a>
 									`
 						);
-				
-				
-				localStorage.setItem("contador", contador);
-				
 				
 				bullcoin--;
 				localStorage.setItem('bullcoin', JSON.stringify({"monto": bullcoin}))
