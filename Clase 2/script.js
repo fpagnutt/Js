@@ -14,10 +14,15 @@ class Criptomonedas{
     }
 }
 
-//creacion array
+//declaraciones
 const monedas = [];
 const carrito = [];
 let bullcoin;
+let storageContador;
+
+
+
+
 
 //carga de criptomonedas en los array
 const moneda1 = new Criptomonedas(1, "Binance Coin", "BNB", 600, 5, (100/600));
@@ -42,6 +47,13 @@ monedas.push(moneda1, moneda2, moneda3, moneda4, moneda5, moneda6, moneda7, mone
 let formulario = document.getElementById("formulario");
 let local = JSON.parse(localStorage.getItem("usuario"))
 let mensajeSaludo = document.getElementById("saludo");
+
+let contador = 0;
+if(storageContador === null){
+	localStorage.setItem("contador", contador);
+	storageContador = localStorage.getItem("contador", contador)
+}
+
 
 
 
@@ -97,54 +109,76 @@ for (const moneda of monedas){
 					</div>
 					`
 	mainIndex.append(contenedor);
-	document.getElementById(`${moneda.id}`).addEventListener('click', () => comprarCripto(moneda));
+	$(`#${moneda.id}`).click (() => comprarCripto(moneda));
 		
 }
 
 
+
+
+
 //Compra de cripto - suma total y muestra imagen de cripto comprada
 function comprarCripto(producto){
+	
 	let edadComprador = JSON.parse(localStorage.getItem("edad"))
 	if(edadComprador >= 18){
+		
+
 		let compra = carrito.find(el=> el.id === producto.id)
 		let bullDisponible = JSON.parse(localStorage.getItem('bullcoin'))
 		if(bullDisponible.monto !== 0 && bullDisponible.monto > 0){
 			if(compra){
 				if(compra.cantidad < producto.stock){
 					compra.aumentarCantidad();
+					contador++;
 					let totalCripto = compra.cantidad * compra.equivalente
-					document.getElementById(`${producto.id}total`).innerHTML=`Total de ${producto.logo} adquirido: ${totalCripto}`
+					$("#mainCompra").html(  `
+							<a href="carrito.html" id="${producto.id}total" class="cart">🛒${contador}</a>
+									`
+						);
+											
+									
+					localStorage.setItem("contador", contador);
+									
 					bullcoin--
 					localStorage.setItem('bullcoin', JSON.stringify({"monto": bullcoin}))
+					
 				}else{
 					document.getElementById(`${producto.id}`).className='disabled'
 				}
 			}else{
-				let produc = producto
+				let produc = producto 
 				produc.aumentarCantidad()
 				carrito.push(produc)
+				contador++;
 				let totalCripto = produc.cantidad * produc.equivalente
-				const prueba = document.getElementById("mainCompra");
-				prueba.innerHTML += `
-				<div class=>
-					<div class="card-body paddingTop">
-						<h4 class="card-title">${producto.cripto}</h4>
-						<p id="${producto.id}total" class="card-text" style="font-size: 17px">Total de ${producto.logo} adquirido: ${totalCripto}</b></p>
-						<p style="font-size: 15px"> Cada <b>Bullcoin</b> equivale: <b> ${producto.equivalente} ${producto.logo}<b></p>
-						<div class="paddingTop"></div>
-					</div>
-				</div>
-				`
-				bullcoin--
+				
+				$("#mainCompra").html(  `
+							<a href="carrito.html" id="${producto.id}total" class="cart">🛒${contador}</a>
+									`
+						);
+				
+				
+				localStorage.setItem("contador", contador);
+				
+				
+				bullcoin--;
 				localStorage.setItem('bullcoin', JSON.stringify({"monto": bullcoin}))
 			}
 		}else{
 			//sweetalert
-			alert('Has alcanzado la compra maxima de 5 BULLCOINS')
+			alert('Has alcanzado la compra maxima de 5 BULLCOINS');
+			const botonComprar = document.querySelectorAll(".comprar");
+			for (let i = 0; i < botonComprar.length; i++) {
+				botonComprar[i].disabled = true;	
+			}
 		}
 		localStorage.setItem('ventaCripto', JSON.stringify(carrito))
+	}else{
+		mensajeSaludo.innerHTML = "Deberas ingresar tu nombre y edad para poder comenzar";
 	}
-}
+	storageContador = localStorage.getItem("contador", contador);
+}	
 
 function cargarLocalStorage(){
     let carro = JSON.parse(localStorage.getItem('ventaCripto'))
@@ -161,23 +195,21 @@ function cargarLocalStorage(){
     if(carro){
         for(let i = 0; i < carro.length; i++){
             carrito.push(new Criptomonedas(carro[i].id, carro[i].cripto, carro[i].logo, carro[i].precio, carro[i].stock, carro[i].equivalente, carro[i].cantidad ))
+			
 		}
+		storageContador = localStorage.getItem("contador", contador)
 		for(const producto of carro){
 			let totalCripto = producto.cantidad * producto.equivalente
-			const prueba = document.getElementById("mainCompra");
-			prueba.innerHTML += `
-			<div class=>
-				<div class="card-body paddingTop">
-					<h4 class="card-title">${producto.cripto}</h4>
-					<p id="${producto.id}total" class="card-text" style="font-size: 17px">Total de ${producto.logo} adquirido: ${totalCripto}</b></p>
-					<p style="font-size: 15px"> Cada <b>Bullcoin</b> equivale: <b> ${producto.equivalente} ${producto.logo}<b></p>
-					<div class="paddingTop"></div>
-				</div>
-			</div>
-			`
+			$("#mainCompra").html(  `
+							<a href="carrito.html" id="${producto.id}total" class="cart">🛒${storageContador}</a>
+									`
+						);
+			
 		}
 	}
 }
+
+
 
 cargarLocalStorage()
 

@@ -96,13 +96,6 @@ body{
 }
 
 
-#contCompra{
-	display: flex;
-	flex-direction: row;
-	height: 100px;
-	width: 100%;
-}
-
 
 .card3 {
     position: relative;
@@ -116,3 +109,11 @@ body{
     border: 1px solid rgba(0,0,0,.125); 
     border-radius: 0.25rem;
 	}
+
+
+.cart{
+	font-size: 80px;
+	text-align: center;
+	color: black;
+}
+
