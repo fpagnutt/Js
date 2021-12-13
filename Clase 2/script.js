@@ -48,7 +48,16 @@ let formulario = document.getElementById("formulario");
 let local = JSON.parse(localStorage.getItem("usuario"))
 let mensajeSaludo = document.getElementById("saludo");
 
-let contador = 0;
+
+//validaciones
+
+let contador2 = localStorage.getItem("contador", contador);
+if(contador2 === 0){
+	contador = 0;
+}else{
+	contador = localStorage.getItem("contador", contador)
+}
+
 if(storageContador === null){
 	localStorage.setItem("contador", contador);
 	storageContador = localStorage.getItem("contador", contador)
