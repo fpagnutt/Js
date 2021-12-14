@@ -25,18 +25,18 @@ let storageContador;
 
 
 //carga de criptomonedas en los array
-const moneda1 = new Criptomonedas(1, "Binance Coin", "BNB", 600, 5, (100/600));
-const moneda2 = new Criptomonedas(2, "Ethereum", "ETH", 4500, 5, (100/4500) );
-const moneda3 = new Criptomonedas(3, "Bitcoin", "BTC", 56000, 5, (100/56000));
-const moneda4 = new Criptomonedas(4, "Litecoin", "LTC", 200, 5, (100/200));
-const moneda5 = new Criptomonedas(5, "Solana", "SOL", 220, 5, (100/220));
-const moneda6 = new Criptomonedas(6, "Avalanche", "AVAX", 115, 5, (100/115));
-const moneda7 = new Criptomonedas(7, "Oasis Network", "ROSE", 0.36, 5, (100/0.36));
-const moneda8 = new Criptomonedas(8, "Sand Box", "SAND", 6.25, 5, (100/6.25));
-const moneda9 = new Criptomonedas(9, "Gala", "GALA", 0.60, 5, (100/0.6));
-const moneda10 = new Criptomonedas(10, "Cardano", "ADA", 1.6, 5, (100/1.6));
-const moneda11 = new Criptomonedas(11, "Terra", "LUNA", 66, 5, (100/66));
-const moneda12 = new Criptomonedas(12, "Shiba Inu", "SHIB", 0.000042, 5, (100/0.000042));
+const moneda1 = new Criptomonedas(1, "Binance Coin", "BNB", 600, 15, (100/600));
+const moneda2 = new Criptomonedas(2, "Ethereum", "ETH", 4500, 15, (100/4500) );
+const moneda3 = new Criptomonedas(3, "Bitcoin", "BTC", 56000, 15, (100/56000));
+const moneda4 = new Criptomonedas(4, "Litecoin", "LTC", 200, 15, (100/200));
+const moneda5 = new Criptomonedas(5, "Solana", "SOL", 220, 15, (100/220));
+const moneda6 = new Criptomonedas(6, "Avalanche", "AVAX", 115, 15, (100/115));
+const moneda7 = new Criptomonedas(7, "Oasis Network", "ROSE", 0.36, 15, (100/0.36));
+const moneda8 = new Criptomonedas(8, "Sand Box", "SAND", 6.25, 15, (100/6.25));
+const moneda9 = new Criptomonedas(9, "Gala", "GALA", 0.60, 15, (100/0.6));
+const moneda10 = new Criptomonedas(10, "Cardano", "ADA", 1.6, 15, (100/1.6));
+const moneda11 = new Criptomonedas(11, "Terra", "LUNA", 66, 15, (100/66));
+const moneda12 = new Criptomonedas(12, "Shiba Inu", "SHIB", 0.000042, 15, (100/0.000042));
 
 
 //se cargan las distintas cripto en el array
@@ -49,7 +49,7 @@ let local = JSON.parse(localStorage.getItem("usuario"))
 let mensajeSaludo = document.getElementById("saludo");
 
 
-//validaciones
+//validaciones e inicializaciones
 
 let contador2 = localStorage.getItem("contador", contador);
 if(contador2 === 0){
@@ -126,7 +126,7 @@ for (const moneda of monedas){
 
 
 
-//Compra de cripto - suma total y muestra imagen de cripto comprada
+//Compra de cripto 
 function comprarCripto(producto){
 	
 	let edadComprador = JSON.parse(localStorage.getItem("edad"))
@@ -176,10 +176,7 @@ function comprarCripto(producto){
 		}else{
 			//sweetalert
 			alert('Has alcanzado la compra maxima de 5 BULLCOINS');
-			const botonComprar = document.querySelectorAll(".comprar");
-			for (let i = 0; i < botonComprar.length; i++) {
-				botonComprar[i].disabled = true;	
-			}
+		
 		}
 		localStorage.setItem('ventaCripto', JSON.stringify(carrito))
 	}else{
@@ -187,6 +184,8 @@ function comprarCripto(producto){
 	}
 	storageContador = localStorage.getItem("contador", contador);
 }	
+
+
 
 function cargarLocalStorage(){
     let carro = JSON.parse(localStorage.getItem('ventaCripto'))
