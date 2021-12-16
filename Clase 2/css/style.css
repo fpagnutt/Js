@@ -31,7 +31,7 @@ body{
 
 .main {
 	text-align: center;
-	max-height: 100vh;
+	
 	font-family: 'Space Mono', monospace;
 	font-size: 20px;
 	padding-top: 90px;
@@ -54,6 +54,7 @@ body{
     display:grid;
     gap: 1rem;
     grid-template-columns: repeat(auto-fill, minmax(min(100%,20rem), 1fr));
+	padding-left: 22px;
 }
 
 
@@ -66,21 +67,33 @@ body{
 .inputEstilo{
 	border: .5px solid black;
 	min-height: 45px;
-	width: 300px;.
+	width: 350px;
 	font-family: 'Space Mono', monospace;
 	font-size: 20px;
 	text-align: center;
 }
 
-#contador2 img{
-	width: 10%;
+.inputEstilo2{
+	border: .5px solid black;
+	min-height: 45px;
+	width: 950px;
+	font-family: 'Space Mono', monospace;
+	font-size: 20px;
+	text-align: center;
+}
+
+
+#header img{
+	width: 20%;
 }
 
 #mainCompra img{
 	width: 20%;
 }
 
-
+.verde{
+	background-color: green;
+}
 
 .card2 {
     position: relative;
@@ -112,8 +125,15 @@ body{
 
 
 .cart{
-	font-size: 80px;
+	font-size: 60px;
 	text-align: center;
 	color: black;
+	text-decoration: none;
+	
 }
 
+.btn-primary{
+	background-color: rgb(228, 67, 67) !important;
+	border-color: black !important;
+	
+}
