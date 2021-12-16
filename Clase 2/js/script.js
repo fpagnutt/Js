@@ -22,8 +22,6 @@ let storageContador;
 
 
 
-
-
 //carga de criptomonedas en los array
 const moneda1 = new Criptomonedas(1, "Binance Coin", "BNB", 600, 15, (100/600));
 const moneda2 = new Criptomonedas(2, "Ethereum", "ETH", 4500, 15, (100/4500) );
@@ -42,8 +40,6 @@ const moneda14 = new Criptomonedas(14, "Tron", "TRX", 0.08, 15, (100/0.08));
 const moneda15 = new Criptomonedas(15, "Polygon", "MATIC", 2.14, 15, (100/2.14));
 
 
-
-
 //se cargan las distintas cripto en el array
 monedas.push(moneda1, moneda2, moneda3, moneda4, moneda5, moneda6, moneda7, moneda8, moneda9, moneda10, moneda11, moneda12, moneda13, moneda14, moneda15);
 
@@ -55,7 +51,6 @@ let mensajeSaludo = document.getElementById("saludo");
 
 
 //validaciones e inicializaciones
-
 let contador2 = localStorage.getItem("contador", contador);
 if(contador2 === 0){
 	contador = 0;
@@ -130,7 +125,36 @@ for (const moneda of monedas){
 
 
 
+// cartel novedades
 
+$("#cartel").prepend(`
+					<div style="text-align: right; padding-right: 60px;">
+						
+						<ul style="display:none; font-family: 'Space Mono', monospace; font-size:15px;">
+							<h6><b>PROXIMOS ENLISTAMIENTOS</b></h6>
+							<li>Enjin Coin</li>
+							<li>Wax</li>
+							<li>Bora</li>
+							<li>Atari Token</li>
+							<li>Verasity</li>
+						</ul>
+						<div class="paddingTop"></div>
+						<button id="news"class="btn btn-primary comprar boton">NOVEDADES</button>
+					</div>`)
+
+
+//cartel de novedades animacion					
+let a;
+$("#news").click(() => {
+	if(!a){
+		$("ul").show();
+		a = !a;
+	}else{
+		$("ul").hide();
+		a = !a;
+	}
+	
+})
 
 //Compra de cripto 
 function comprarCripto(producto){
