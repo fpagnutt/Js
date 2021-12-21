@@ -50,9 +50,17 @@ function eliminarCompra (cripto){
 } 
 
 
-
-
-
+let bep = 0;
+$("#inputWallet").click(() => {
+    
+    if(bep === 0){
+        $("#bep20").append(`<div class="paddingTop"></div>
+        <div><h5>Recuerde utilizar la red <b>BEP20</b></h5></div>`)
+        bep++;
+    }
+    
+   
+})
 
 let formulario = document.getElementById("formulario");
 
@@ -113,17 +121,7 @@ function validar (event){
     
 }
 
-let bep = 0;
-$("#inputWallet").click(() => {
-    
-    if(bep === 0){
-        $("#bep20").append(`<div class="paddingTop"></div>
-        <div><h5>Recuerde utilizar la red <b>BEP20</b></h5></div>`)
-        bep++;
-    }
-    
-   
-})
+
 
 
 

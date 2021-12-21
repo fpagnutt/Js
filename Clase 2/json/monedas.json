@@ -1,0 +1,17 @@
+[
+    {"id":"1", "cripto":"Binance Coin", "logo": "BNB", "precio": "600", "stock": "15", "equivalente": "(100/600)"},
+    {"id":"2", "cripto":"Ethereum", "logo": "ETH", "precio": "4500", "stock": "15", "equivalente": "(100/4500)"},
+    {"id":"3", "cripto":"Bitcoin", "logo": "BTC", "precio": "56000", "stock": "15", "equivalente": "(100/56000)"},
+    {"id":"4", "cripto":"Litecoin", "logo": "LTC", "precio": "200", "stock": "15", "equivalente": "(100/200)"},
+    {"id":"5", "cripto":"Solana", "logo": "SOL", "precio": "220", "stock": "15", "equivalente": "(100/220)"},
+    {"id":"6", "cripto":"Avalanche", "logo": "AVAX", "precio": "115", "stock": "15", "equivalente": "(100/115)"},
+    {"id":"7", "cripto":"Oasis Network", "logo": "ROSE", "precio": "0.36", "stock": "15", "equivalente": "(100/0.36)"},
+    {"id":"8", "cripto":"Sand Box", "logo": "SAND", "precio": "6.25", "stock": "15", "equivalente": "(100/6.25)"},
+    {"id":"9", "cripto":"Gala", "logo": "GALA", "precio": "0.60", "stock": "15", "equivalente": "(100/0.60)"},
+    {"id":"10", "cripto":"Cardano", "logo": "ADA", "precio": "1.6", "stock": "15", "equivalente": "(100/1.6)"},
+    {"id":"11", "cripto":"Terra", "logo": "LUNA", "precio": "66", "stock": "15", "equivalente": "(100/66)"},
+    {"id":"12", "cripto":"Shiba Inu", "logo": "SHIB", "precio": "0.000042", "stock": "15", "equivalente": "(100/0.000042)"},
+    {"id":"13", "cripto":"Polkadot", "logo": "DOT", "precio": "27.11", "stock": "15", "equivalente": "(100/27.11)"},
+    {"id":"14", "cripto":"Tron", "logo": "TRX", "precio": "0.08", "stock": "15", "equivalente": "(100/0.08)"},
+    {"id":"15", "cripto":"Polygon", "logo": "MATIC", "precio": "2.14", "stock": "15", "equivalente": "(100/2.14)"}
+]
