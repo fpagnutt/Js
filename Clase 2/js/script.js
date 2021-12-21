@@ -71,6 +71,7 @@ function verificarUsuario(){
 	}
 }
 
+//validacion de edad y creacion del html
 function validar (event){
 	event.preventDefault();
 	let elemento = event.target;
