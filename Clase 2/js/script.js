@@ -1,6 +1,3 @@
-
-
-
 class Criptomonedas{
 	constructor(id, cripto, logo, precio, stock, equivalente, cantidad){
 		this.id = id;
@@ -22,6 +19,7 @@ const monedas = [];
 const carrito = [];
 let bullcoin;
 let storageContador;
+let contador;
 
 let URL = "./json/monedas.json"
 
@@ -61,12 +59,16 @@ function verificarUsuario(){
 	}else{
 		if(local.edad < 18){
 			mensajeSaludo.innerHTML = "Bienvenidx " + local.nombre + ". Debes ser mayor para realizar transacciones en este sitio";
+			
 	
 		}else{
 			mensajeSaludo = document.getElementById("saludo");
 			mensajeSaludo.innerHTML = `	<h2>Bienvenidx  ${local.nombre}.</h2>
 										 <p>Tienes <b>5 BULLCOINS</b> (equivalentes a usd500) para distribuir a eleccion</p>`;
 			cargarHtml()
+			let borraForm = document.getElementById("formulario");
+			let padre = borraForm.parentNode
+			padre.removeChild(formulario)
 		}
 	}
 }
@@ -89,6 +91,9 @@ function validar (event){
 			localStorage.setItem("edad", edad);
 		}
 		cargarHtml()
+		let borraForm = document.getElementById("formulario");
+			let padre = borraForm.parentNode
+			padre.removeChild(formulario)
 	}
 }
 
@@ -200,7 +205,5 @@ function cargarLocalStorage(){
 		}
 	}
 }
-
-
 cargarLocalStorage()
 

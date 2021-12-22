@@ -1,18 +1,20 @@
-
+//creacion html de novedades y contacto en el index
 $("#cartel").prepend(`
-					<div style="text-align: right; padding-right: 60px;">
-						
-						<ul style="display:none; font-family: 'Space Mono', monospace; font-size:15px;">
-							<h6><b>PROXIMOS ENLISTAMIENTOS</b></h6>
-							<li>Enjin Coin</li>
-							<li>Wax</li>
-							<li>Bora</li>
-							<li>Atari Token</li>
-							<li>Verasity</li>
-						</ul>
-						<div class="paddingTop"></div>
-						<button id="news"class="btn btn-primary comprar boton">NOVEDADES</button>
-					</div>`)
+					
+					<ol style= "width: 100%; height: 80px; display: flex; justify-content: space-between; list-style: none;">
+						<li style="padding-left: 40px;"><button id="news"class="btn btn-primary comprar boton">NOVEDADES</button></li>
+						<li><a href="../html/bullcoin.html"><button id="buy" class="btn btn-primary comprar boton">BULLCOIN</button></a>
+						<li style="padding-right: 40px;"><a href="../html/contacto.html"<button id="contacto"class="btn btn-primary comprar boton">CONTACTO</button></a></li>
+					</ol>
+					<ul style="display:none; font-family: 'Space Mono', monospace; font-size:15px; padding-left: 40px;">
+						<h6><b>PROXIMOS ENLISTAMIENTOS</b></h6>
+						<li>Enjin Coin</li>
+						<li>Wax</li>
+						<li>Bora</li>
+						<li>Atari Token</li>
+						<li>Verasity</li>
+					</ul>
+						`)
 
 
 //cartel de novedades animacion					
@@ -28,6 +30,8 @@ $("#news").click(() => {
 	
 })
 
+
+//animacion para el carrito - mensaje informando que utilices red
 let bep = 0;
 $("#inputWallet").click(() => {
     
@@ -39,3 +43,4 @@ $("#inputWallet").click(() => {
     
    
 })
+
