@@ -33,10 +33,9 @@ $.getJSON(URL, (data, _estado) => {
 });
 
 
-//Validacion de los datos de input
+
 let formulario = document.getElementById("formulario");
 let local = JSON.parse(localStorage.getItem("usuario"))
-let mensajeSaludo = document.getElementById("saludo");
 
 
 //validaciones e inicializaciones
@@ -58,13 +57,15 @@ function verificarUsuario(){
 		formulario.addEventListener("submit", validar);
 	}else{
 		if(local.edad < 18){
-			mensajeSaludo.innerHTML = "Bienvenidx " + local.nombre + ". Debes ser mayor para realizar transacciones en este sitio";
-			
+			//sweetalert
+			Swal.fire({
+				icon: 'error',
+				title: 'Ha ocurrido un error.',
+				text: 'Debes ser mayor de edad para realizar transacciones en este sitio!',
+				
+			})
 	
 		}else{
-			mensajeSaludo = document.getElementById("saludo");
-			mensajeSaludo.innerHTML = `	<h2>Bienvenidx  ${local.nombre}.</h2>
-										 <p>Tienes <b>5 BULLCOINS</b> (equivalentes a usd500) para distribuir a eleccion</p>`;
 			cargarHtml()
 			let borraForm = document.getElementById("formulario");
 			let padre = borraForm.parentNode
@@ -72,6 +73,7 @@ function verificarUsuario(){
 		}
 	}
 }
+
 
 //validacion de edad y creacion del html
 function validar (event){
@@ -82,22 +84,54 @@ function validar (event){
 	let edad = elemento.children[3].value;
 
 	if(edad < 18){
-		mensajeSaludo.innerHTML = "Bienvenidx " + nombre + ". Debes ser mayor para realizar transacciones en este sitio";
+		//sweetalert
+		Swal.fire({
+			icon: 'error',
+			title: 'Ha ocurrido un error.',
+			text: 'Debes ser mayor de edad para realizar transacciones en este sitio!',
+			
+		  })
 	}else{
-		mensajeSaludo.innerHTML = `<h2>Bienvenidx  ${nombre}.</h2>
-		<p>Tienes <b>5 BULLCOINS</b> (equivalentes a usd500) para distribuir a eleccion</p>`
 		if(!localStorage.getItem("usuario")){
 			localStorage.setItem("usuario", JSON.stringify({nombre,edad}));
 			localStorage.setItem("edad", edad);
+			
 		}
 		cargarHtml()
 		let borraForm = document.getElementById("formulario");
-			let padre = borraForm.parentNode
-			padre.removeChild(formulario)
+		let padre = borraForm.parentNode
+		padre.removeChild(formulario)
+		$("#code").click(() => validarCodigo())
+		
 	}
 }
 
-
+function validarCodigo(){
+	
+	let cod = document.getElementById("codigo").value;
+	if(cod === "333"){
+		alert("Has adquirido: 3 BLC")
+		localStorage.setItem("codigo", 3);
+        bullcoin = 3;
+		cargarLocalStorage();
+		
+			
+	}
+	if(cod === "555"){
+		alert("Has adquirido: 5 BLC")
+		localStorage.setItem("codigo", 5);
+		bullcoin = 5;
+		cargarLocalStorage();
+		
+	}
+	if(cod === "151515"){
+		alert("Has adquirido: 15 BLC")
+		localStorage.setItem("codigo", 15);
+		bullcoin = 15;
+		cargarLocalStorage();
+		
+	}
+}
 
 const mainIndex = document.getElementById('main');
 
@@ -144,7 +178,7 @@ function comprarCripto(producto){
 									`
 						);
 																		
-					bullcoin--
+					bullcoin--;
 					localStorage.setItem('bullcoin', JSON.stringify({"monto": bullcoin}))
 					
 				}else{
@@ -166,14 +200,26 @@ function comprarCripto(producto){
 			}
 		}else{
 			//sweetalert
-			alert('Has alcanzado la compra maxima de 5 BULLCOINS');
+			Swal.fire({
+				icon: 'error',
+				title: 'Maximo alcanzado',
+				text: 'Has utilizado el maximo disponible',
+				
+			  })
 		
 		}
 		localStorage.setItem('ventaCripto', JSON.stringify(carrito))
 	}else{
-		mensajeSaludo.innerHTML = "Deberas ingresar tu nombre y edad para poder comenzar";
+		//sweetalert
+		Swal.fire({
+			icon: 'error',
+			title: 'Ha ocurrido un error.',
+			text: 'Debes ser mayor de edad para realizar transacciones en este sitio!',
+			
+		  })
 	}
 	storageContador = localStorage.getItem("contador", contador);
+	
 }	
 
 
@@ -184,7 +230,7 @@ function cargarLocalStorage(){
 	
 	//declaramos cuantas criptos tenemos almacenadas
 	if(!bullDisponible){
-		bullcoin = 5;
+
 		localStorage.setItem("bullcoin", JSON.stringify({"monto": bullcoin}));
 	}else{
 		bullcoin = bullDisponible.monto
@@ -205,5 +251,15 @@ function cargarLocalStorage(){
 		}
 	}
 }
-cargarLocalStorage()
+
+//ocultar html y cargar storage
+let cod1 = localStorage.getItem("codigo");
+if(cod1){
+	let none = document.getElementById("formulario2")
+	none.setAttribute('style', 'display: none;')
+	let mensaje = document.getElementById("giftcode")
+	mensaje.setAttribute('style', 'display: none;')
+	cargarLocalStorage()
+	
+}
 

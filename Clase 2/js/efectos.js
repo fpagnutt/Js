@@ -1,9 +1,8 @@
 //creacion html de novedades y contacto en el index
 $("#cartel").prepend(`
-					
 					<ol style= "width: 100%; height: 80px; display: flex; justify-content: space-between; list-style: none;">
 						<li style="padding-left: 40px;"><button id="news"class="btn btn-primary comprar boton">NOVEDADES</button></li>
-						<li><a href="../html/bullcoin.html"><button id="buy" class="btn btn-primary comprar boton">BULLCOIN</button></a>
+						<li style="padding-left: 420px;"><a href="../html/bullcoin.html"><img id="giftcard" src="../img/gifcard.png" style="width: 15%;"></a></li>
 						<li style="padding-right: 40px;"><a href="../html/contacto.html"<button id="contacto"class="btn btn-primary comprar boton">CONTACTO</button></a></li>
 					</ol>
 					<ul style="display:none; font-family: 'Space Mono', monospace; font-size:15px; padding-left: 40px;">

@@ -12,20 +12,23 @@
   </head>
   <body>
     <div class="paddingTop"></div>
-    <div id="mosca"></div>
     <div id="cartel"></div>
+    <div class="paddingTop"></div>
     <div class="paddingTop"></div>
     <div id="header" style="text-align: center;"><img src="./img/bull1.png" alt="toroLogo" class="bullcoin"></div>
     <div class="main">
+      
+      <div id="giftcode"><h5>Ya tenes tu codigo? Adquirilo en <a href="html/bullcoin.html" style="color: red;">GIFT CARD</a></h5></div>
+      <div class="paddingTop"></div>
       <form id="formulario">
           <b>Nombre</b> <input type="text" name="nombre" class="inputEstilo">
           <b>Edad</b> <input type="number" name="edad" class="inputEstilo">
           <input type="submit" name="validar" class="btn btn-primary comprar boton" style="width: 90px; height: 40px;">  
-      </form>  
-      <div id="saludo"></div>
-      <div class="paddingTop"></div>
-      <div id="edad" class="paddingTop"></div>
-      <div id="exito"></div>
+      </form>
+      <form id="formulario2" class="paddingTop">
+        <b>Codigo</b> <input id="codigo" type="number" name="codigo" class="inputEstilo">
+			  <button id="code" name="validar" class="btn btn-primary comprar boton" style="width: 90px; height: 40px;">Validar</button>
+      </form> 
       <div id="mainCompra" class="contenedor"></div>
       <div id="carrito" class="cart"></div>
       <p id="contador"></p>
@@ -33,6 +36,7 @@
       <div id="main" class="contenedor"> </div>
     </div>
     <div class="paddingBot"></div>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>

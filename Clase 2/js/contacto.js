@@ -1,43 +1,51 @@
+const boton = document.getElementById("button").addEventListener('click', (e) => validarInputsContacto(e))
+
+//validacion de inputs y modificaciones de css
 function validarInputsContacto(e){
     
+    e.preventDefault();
 
-    let elemento = e.target;
-	
-	let nombre = e.children[1].value;
-	let email = e.children[3].value;
-    let asunto = e.children[5].value;
-    let mensaje = e.children[7].value;
+    var name = document.getElementById("nombre").value;
+    var email = document.getElementById("email").value;
+    var asunto = document.getElementById("asunto").value;
+    var msj = document.getElementById("msj").value;
 
-    if(nombre !== null){
-        if(email !== null){
-            if(asunto !== null){
-                if(mensaje !== null){
-                    console.log("Asdsad")
-                    $("#modal").prepend(`
-                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">BULLCOIN</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                    </div>
-                                    <div class="modal-body">
-                                    Transaccion realizada con exito.
-                                    </div>
-                                    <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    `)
+    if(name){
+        let name2 = document.getElementById("nombre");
+        name2.setAttribute('style', 'border: solid 2px green; width: 220px;')
+        if(email){
+            let email2 = document.getElementById("email");
+            email2.setAttribute('style', 'border: solid 2px green; width: 300px;')
+            if(asunto){
+                let asunto2 = document.getElementById("asunto");
+                asunto2.setAttribute('style', 'border: solid 2px green; width: 400px;')
+                if(msj){
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                    })
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'Solicitud enviada correctamente'
+                    })
+                    name2.setAttribute('style', 'width: 220px;')
+                    name2.value = ""
+                    email2.setAttribute('style', "width: 300px;")
+                    email2.value = ""
+                    asunto2.setAttribute('style', "width: 400px;")
+                    asunto2.value = ""
+                    let msj2 = document.getElementById("msj")
+                    msj2.value = ""
                 }
             }
         }
     }
 }
 
-
-validarInputsContacto();
