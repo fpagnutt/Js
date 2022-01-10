@@ -1,12 +1,6 @@
 $("#gift3").click ( () => correo3())
-
-
 $("#gift5").click ( () => correo5())
-
-
 $("#gift15").click ( () => correo15())
-
-
 
 async function correo3 (){
     const { value: email } = await Swal.fire({

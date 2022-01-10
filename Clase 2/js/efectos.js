@@ -15,7 +15,6 @@ $("#cartel").prepend(`
 					</ul>
 						`)
 
-
 //cartel de novedades animacion					
 let a2;
 $("#news").click(() => {
@@ -26,20 +25,16 @@ $("#news").click(() => {
 		$("ul").hide();
 		a2 = !a2;
 	}
-	
 })
 
 
 //animacion para el carrito - mensaje informando que utilices red
 let bep = 0;
 $("#inputWallet").click(() => {
-    
-    if(bep === 0){
+       if(bep === 0){
         $("#bep20").append(`<div class="paddingTop"></div>
         <div><h5>Recuerde utilizar la red <b>BEP20</b></h5></div>`)
         bep++;
     }
-    
-   
 })
 

@@ -2,14 +2,11 @@ const boton = document.getElementById("button").addEventListener('click', (e) =>
 
 //validacion de inputs y modificaciones de css
 function validarInputsContacto(e){
-    
     e.preventDefault();
-
     var name = document.getElementById("nombre").value;
     var email = document.getElementById("email").value;
     var asunto = document.getElementById("asunto").value;
     var msj = document.getElementById("msj").value;
-
     if(name){
         let name2 = document.getElementById("nombre");
         name2.setAttribute('style', 'border: solid 2px green; width: 220px;')

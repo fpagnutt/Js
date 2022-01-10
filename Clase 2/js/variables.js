@@ -1,0 +1,11 @@
+const monedas = [];
+const carrito = [];
+let bullcoin;
+let storageContador;
+let contador;
+let URL = "./json/monedas.json";
+let formulario = document.getElementById("formulario");
+let local = JSON.parse(localStorage.getItem("usuario"));
+let contador2 = localStorage.getItem("contador", contador);
+const mainIndex = document.getElementById('main');
+let cod1 = localStorage.getItem("codigo");
